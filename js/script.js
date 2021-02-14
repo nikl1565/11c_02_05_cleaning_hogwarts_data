@@ -131,7 +131,6 @@ function prepareObjects(jsonData) {
 
         // Image
         let multipleWithTheSameLastName = 0;
-
         unfilteredStudents.forEach((unfilteredStudent) => {
             const lastSpace = unfilteredStudent.fullname.lastIndexOf(" ");
             const lastName = unfilteredStudent.fullname
@@ -144,7 +143,6 @@ function prepareObjects(jsonData) {
                 multipleWithTheSameLastName++;
             }
         });
-
         // If no lastname
         if (firstName.toLowerCase() === lastName.toLowerCase()) {
             student.image = `https://images.unsplash.com/photo-1598153346810-860daa814c4b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1780&q=80`;
@@ -194,7 +192,7 @@ function displayListOfStudents() {
 
         const image = document.createElement("img");
         image.src = student.image;
-        image.alt = student.name;
+        image.alt = [student.firstName, student.nickName, student.middleName, student.lastName].filter(Boolean).join(" ");
 
         template.appendChild(name);
         template.appendChild(gender);
