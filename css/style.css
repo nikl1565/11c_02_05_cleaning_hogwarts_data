@@ -17,3 +17,9 @@ body > * {
     background-color: #fff;
     padding: 1rem;
 }
+
+img {
+    max-width: 100%;
+    display: block;
+    height: auto;
+}
