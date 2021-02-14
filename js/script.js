@@ -153,7 +153,7 @@ function prepareObjects(jsonData) {
         } else if (multipleWithTheSameLastName >= 2) {
             console.log("lol");
             console.log("firstName", firstName);
-            student.image = `img/${lastName}_${firstName}.png`;
+            student.image = `img/${lastName}_${firstName.toLowerCase()}.png`;
         } else {
             student.image = `img/${lastName}_${firstNameFirstLetter.toLowerCase()}.png`;
         }
