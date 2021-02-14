@@ -1,0 +1,19 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    padding: 3rem;
+    background-color: #e6e6e6;
+}
+
+body > * {
+    background-color: #fff;
+    padding: 1rem;
+}

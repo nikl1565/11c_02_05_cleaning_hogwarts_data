@@ -5,12 +5,12 @@ window.addEventListener("DOMContentLoaded", init);
 const allStudents = [];
 const Student = {
     firstName: "",
-    lastName: "",
     middleName: "",
     nickName: undefined,
+    lastName: "",
     gender: undefined,
-    image: undefined,
     house: "",
+    image: undefined,
 };
 
 function init() {
@@ -43,14 +43,15 @@ function prepareObjects(jsonData) {
         const lastSpaceInFullName = fullName.lastIndexOf(" ");
         const checkForHyphen = fullName.indexOf("-");
 
+        let firstNameFirstLetter;
         // Firstname
         if (firstSpaceInFullName === -1) {
-            const firstNameFirstLetter = fullName[0].toUpperCase();
+            firstNameFirstLetter = fullName[0].toUpperCase();
             const firstNameAfterFirstLetter = fullName.substring(1);
             student.firstName = firstNameFirstLetter + firstNameAfterFirstLetter;
         } else {
             const findFirstName = fullName.substring(0, firstSpaceInFullName);
-            const firstNameFirstLetter = findFirstName[0].toUpperCase();
+            firstNameFirstLetter = findFirstName[0].toUpperCase();
             const firstNameAfterFirstLetter = findFirstName.substring(1);
             student.firstName = firstNameFirstLetter + firstNameAfterFirstLetter;
         }
@@ -112,15 +113,53 @@ function prepareObjects(jsonData) {
         const genderAfterFirstLetter = gender.substring(1);
         student.gender = genderFirstLetter + genderAfterFirstLetter;
 
+        // Image
+        student.image = `img/${lastName}_${firstNameFirstLetter.toLowerCase()}.png`;
+
         // Add student to allStudent list
         allStudents.push(student);
     });
 
     console.table(allStudents);
+
+    displayListOfStudents();
 }
 
 function displayListOfStudents() {
     console.log("displayListOfStudents");
+
+    allStudents.forEach((student) => {
+        console.log(student);
+
+        const template = document.createElement("div");
+
+        const name = document.createElement("h2");
+        name.innerHTML = student.firstName;
+        if (student.middleName) {
+            name.innerHTML += ` ${student.middleName}`;
+        }
+        if (student.nickName) {
+            name.innerHTML += ` "${student.nickName}"`;
+        }
+        name.innerHTML += ` ${student.lastName}`;
+
+        const gender = document.createElement("p");
+        gender.innerHTML = student.gender;
+
+        const house = document.createElement("p");
+        house.innerHTML = student.house;
+
+        const image = document.createElement("img");
+        image.src = student.image;
+        image.alt = student.name;
+
+        template.appendChild(name);
+        template.appendChild(gender);
+        template.appendChild(house);
+        template.appendChild(image);
+
+        document.querySelector("body").appendChild(template);
+    });
 }
 
 function displayStudent() {
